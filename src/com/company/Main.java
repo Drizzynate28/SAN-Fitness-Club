@@ -1,5 +1,5 @@
 package com.company;
-
+import Pages.LoginPage;
 import javax.swing.*;
 
 public class Main {
