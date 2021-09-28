@@ -6,7 +6,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 public class Trainee extends Person {
-    private static int countTrainees =0;
+    private static int countTrainees = 1;
     private int traineeId = 1;
     private String password;
     private ArrayList<Workout> workouts;
