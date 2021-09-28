@@ -24,14 +24,14 @@ public class RegisterPage extends JFrame{
     private JPasswordField passwordPasswordField;
     private JTextField PhoneField;
     private JButton RegisterButton;
-    private JTextField IdFiled;
+    private JTextField IdField;
 
     public RegisterPage(String title){
         super(title);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setPreferredSize(new Dimension(500,360));
         this.setContentPane(RegisterPanel);
-        
+
         MonthCB.addItem("Month");
         for (int i = 1;i<=12;i++){
              MonthCB.addItem(i);
@@ -52,8 +52,8 @@ public class RegisterPage extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e)  {
                 try {
-                Trainee trainee = new Trainee(Integer.parseInt(IdFiled.getText()), NameFiled.getText(), EmailField.getText() ,PhoneField.getText(),new Date(Integer.parseInt(YearCB.getSelectedItem().toString()),Integer.parseInt(MonthCB.getSelectedItem().toString()),Integer.parseInt(DayCB.getSelectedItem().toString())),passwordPasswordField.getPassword().toString());
-                FileWriter myWriter = new FileWriter("Files/Trainees.txt");
+                Trainee trainee = new Trainee(Integer.parseInt(IdField.getText()), NameFiled.getText(), EmailField.getText() ,PhoneField.getText(),new Date(Integer.parseInt(YearCB.getSelectedItem().toString()),Integer.parseInt(MonthCB.getSelectedItem().toString()),Integer.parseInt(DayCB.getSelectedItem().toString())),passwordPasswordField.getPassword().toString());
+                FileWriter myWriter = new FileWriter("src/Files/Trainees.txt");
                 myWriter.write(trainee.toString());
                 myWriter.close();
                 System.out.println("Successfully wrote to the file.");
