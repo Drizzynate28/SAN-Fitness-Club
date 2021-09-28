@@ -1,0 +1,6 @@
+YOGA:0
+Weights:1
+HIT:0
+Zomba:0
+BodyBump:0
+Swiming:0

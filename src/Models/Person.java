@@ -58,7 +58,7 @@ public abstract class Person {
     }
 
     public String getDetails() {
-        return "id:" + id + " Full Name:+" + fullName + " Email" + email + " Phone Number: " + phoneNumber + " Date Of Birth: " + dateOfBirth;
+        return "id:" + id + " Full Name:-" + fullName + "- Email:" + email + " Phone Number: " + phoneNumber + " Date Of Birth: " + dateOfBirth;
     }
 
     @Override

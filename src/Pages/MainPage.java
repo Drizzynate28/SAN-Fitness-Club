@@ -12,13 +12,15 @@ public class MainPage extends JFrame{
     private JButton RegisterButton;
     private JPanel MainPanel;
     private JLabel LogoLabel;
+    private JLabel HelloLabel;
 
-    public MainPage(String title) {
+    public MainPage(String title, String fullName) {
         super(title);
         LogoLabel.setIcon(new ImageIcon("MainPageLOGO.jpeg"));
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setPreferredSize(new Dimension(500,600));
         this.setContentPane(MainPanel);
+        this.HelloLabel.setText(this.HelloLabel.getText()+" " + fullName);
         this.pack();
         RegisterButton.addActionListener(new ActionListener() {
             @Override

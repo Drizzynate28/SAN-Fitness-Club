@@ -41,7 +41,7 @@ public class Trainee extends Person {
 
     @Override
     public String getDetails() {
-        return super.getDetails() + " Trainee ID: "+ traineeId + " Password:"+ password;
+        return super.getDetails() + " Trainee ID + Password: -"+ traineeId + "-"+ password;
     }
 
     public int getTraineePayment(){

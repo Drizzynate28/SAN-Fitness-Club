@@ -53,8 +53,8 @@ public class RegisterPage extends JFrame{
             public void actionPerformed(ActionEvent e)  {
                 try {
                 Trainee trainee = new Trainee(Integer.parseInt(IdField.getText()), NameFiled.getText(), EmailField.getText() ,PhoneField.getText(),new Date(Integer.parseInt(YearCB.getSelectedItem().toString()),Integer.parseInt(MonthCB.getSelectedItem().toString()),Integer.parseInt(DayCB.getSelectedItem().toString())),String.valueOf(passwordPasswordField.getPassword()));
-                FileWriter myWriter = new FileWriter("src/Files/Trainees.txt");
-                myWriter.write(trainee.toString());
+                FileWriter myWriter = new FileWriter("src/Files/Trainees.txt",true);
+                myWriter.write("\n"+trainee.toString());
                 myWriter.close();
                 System.out.println("Successfully wrote to the file.");
                 }catch (IOException ex) {
