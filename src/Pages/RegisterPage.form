@@ -108,6 +108,9 @@
               </grid>
             </constraints>
             <properties>
+              <editable value="false"/>
+              <enabled value="true"/>
+              <foreground color="-4473925"/>
               <toolTipText value="Day"/>
             </properties>
           </component>

@@ -6,14 +6,16 @@ import java.util.Calendar;
 import java.util.Date;
 
 public class Trainee extends Person {
-
-    private int traineeId;
+    private static int countTrainees =0;
+    private int traineeId = 1;
+    private String password;
     private ArrayList<Workout> workouts;
 
-    public Trainee(int id, String fullName, String email, String phoneNumber, Date dateOfBirth, int traineeId, ArrayList<Workout> workouts) {
+    public Trainee(int id, String fullName, String email, String phoneNumber, Date dateOfBirth, String password) {
         super(id, fullName, email, phoneNumber, dateOfBirth);
-        this.traineeId = traineeId;
-        this.workouts = workouts;
+        this.traineeId = countTrainees++;
+        this.password = password;
+        workouts = new ArrayList<Workout>();
     }
 
     public int getTraineeId() {
@@ -39,7 +41,7 @@ public class Trainee extends Person {
 
     @Override
     public String getDetails() {
-        return super.getDetails() + " Trainee ID: "+ traineeId;
+        return super.getDetails() + " Trainee ID: "+ traineeId + " Password:"+ password;
     }
 
     public int getTraineePayment(){
