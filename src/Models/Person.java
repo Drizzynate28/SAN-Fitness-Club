@@ -1,5 +1,6 @@
 package Models;
 
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 public abstract class Person {
@@ -8,13 +9,15 @@ public abstract class Person {
     private String email;
     private String phoneNumber;
     private Date dateOfBirth;
+    protected Date joinDate;
 
-    public Person(int id, String fullName, String email, String phoneNumber, Date dateOfBirth) {
+    public Person(int id, String fullName, String email, String phoneNumber, Date dateOfBirth,Date joinDate) {
         this.id = id;
         this.fullName = fullName;
         this.email = email;
         this.phoneNumber = phoneNumber;
         this.dateOfBirth = dateOfBirth;
+        this.joinDate = joinDate;
     }
 
     public int getId() {
@@ -56,14 +59,23 @@ public abstract class Person {
     public void setDateOfBirth(Date dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
+    public Date getJoinDate() {
+        return joinDate;
+    }
+
+    public void setJoinDate(Date joinDate) {
+        this.joinDate = joinDate;
+    }
+
 
     public String getDetails() {
-        return "id:" + id + " Full Name:-" + fullName + "- Email:" + email + " Phone Number: " + phoneNumber + " Date Of Birth: " + dateOfBirth;
+        return id + "~" + fullName + "~" + email + "~" + phoneNumber + "~" + dateOfBirth +"~" + joinDate;
     }
 
     @Override
     public String toString() {
-        return getDetails();
+        DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        return "id:" + id + " Full Name:" + fullName + " Email:" + email + " Phone Number: " + phoneNumber + " Date Of Birth: " + dateOfBirth+ " Join Date:" + joinDate;
     }
 
 }

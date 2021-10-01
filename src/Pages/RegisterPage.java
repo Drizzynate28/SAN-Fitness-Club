@@ -53,9 +53,9 @@ public class RegisterPage extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 Runnable asyncFileOperation = () -> {
                     try {
-                        Trainee trainee = new Trainee(Integer.parseInt(IdField.getText()), NameFiled.getText(), EmailField.getText(), PhoneField.getText(), new Date(Integer.parseInt(YearCB.getSelectedItem().toString()), Integer.parseInt(MonthCB.getSelectedItem().toString()), Integer.parseInt(DayCB.getSelectedItem().toString())), String.valueOf(passwordPasswordField.getPassword()));
+                        Trainee trainee = new Trainee(Integer.parseInt(IdField.getText()), NameFiled.getText(), EmailField.getText(), PhoneField.getText(), new Date(Integer.parseInt(YearCB.getSelectedItem().toString()), Integer.parseInt(MonthCB.getSelectedItem().toString()), Integer.parseInt(DayCB.getSelectedItem().toString())), String.valueOf(passwordPasswordField.getPassword()),new Date());
                         FileWriter myWriter = new FileWriter("src/Files/Trainees.txt", true);
-                        myWriter.write("\n" + trainee.toString());
+                        myWriter.write("\n" + trainee.getDetails());
                         myWriter.close();
                         System.out.println("Successfully wrote to the file.");
                     } catch (IOException ex) {

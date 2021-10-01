@@ -1,16 +1,16 @@
 package Models;
+import java.text.ParseException;
+import java.time.LocalDate;
 import java.util.Date;
 
 public class Worker extends Person {
-    protected int workerId;
+    protected static int workerId;
     protected Double salary;
-    protected Date joinDate;
 
-    public Worker(int id, String fullName, String email, String phoneNumber, Date dateOfBirth, int workerId, Double salary, Date joinDate) {
-        super(id, fullName, email, phoneNumber, dateOfBirth);
-        this.workerId = workerId;
+    public Worker(int id, String fullName, String email, String phoneNumber, Date dateOfBirth, Double salary, Date joinDate) {
+        super(id, fullName, email, phoneNumber, dateOfBirth, joinDate);
+        this.workerId ++;
         this.salary = salary;
-        this.joinDate = joinDate;
     }
 
     public int getWorkerId() {
@@ -29,26 +29,18 @@ public class Worker extends Person {
         this.salary = salary;
     }
 
-    public Date getJoinDate() {
-        return joinDate;
-    }
-
-    public void setJoinDate(Date joinDate) {
-        this.joinDate = joinDate;
-    }
-
     public Double calculateSalary() {
         return salary;
     }
 
     @Override
     public String getDetails() {
-        return super.getDetails() + " WorkerId: " + workerId + " Join Date: " + joinDate;
+        return super.getDetails() + "~" + workerId + "~" + joinDate;
     }
 
     @Override
     public String toString() {
-        return getDetails();
+        return super.toString() + " WorkerId: " + workerId + " Join Date: " + joinDate;
     }
 }
 

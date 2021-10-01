@@ -7,12 +7,14 @@ public class Gym {
     private String address;
     private ArrayList<Worker> Workers;
     private ArrayList<Trainee> Trainees;
+    private ArrayList<Workout> Workouts;
 
-    public Gym(int gymId, String address, ArrayList<Worker> workers, ArrayList<Trainee> trainees) {
+    public Gym(int gymId, String address, ArrayList<Worker> workers, ArrayList<Trainee> trainees, ArrayList<Workout> workouts) {
         this.gymId = gymId;
         this.address = address;
         Workers = workers;
         Trainees = trainees;
+        Workouts = workouts;
     }
 
     public int getGymId() {
@@ -47,6 +49,14 @@ public class Gym {
         Trainees = trainees;
     }
 
+    public ArrayList<Workout> getWorkouts() {
+        return Workouts;
+    }
+
+    public void setWorkouts(ArrayList<Workout> workouts) {
+        Workouts = workouts;
+    }
+
     public double calculateOutcomes(){
         double sum =0;
         for(int i =0;i<Workers.size();i++)   {
@@ -58,13 +68,17 @@ public class Gym {
     public double calculateIncomes(){
         double sum =0;
         for(int i =0;i<Trainees.size();i++)   {
-            sum += Trainees.get(i).getTraineePayment();
+            sum += (double) Trainees.get(i).getTraineePayment();
         }
         return sum;
     }
 
     public double calculateProfit(){
         return calculateIncomes() - calculateOutcomes();
+    }
+
+    public String getDetails(){
+        return gymId+"~" + address;
     }
 
     @Override

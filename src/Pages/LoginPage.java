@@ -30,6 +30,7 @@ public class LoginPage extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 JFrame frame = new RegisterPage("SAN Fitness Club Register Page");
                 frame.setVisible(true);
+                setVisible(false);
             }
         });
         loginButton.addActionListener(new ActionListener() {
@@ -55,11 +56,12 @@ public class LoginPage extends JFrame {
                 String[] arrOfStr = data.split("\n");
                 boolean flag = false;
                 for (int i =0;i<arrOfStr.length;i++){
-                    String[] strUser = arrOfStr[i].split("-");
-                    if (strUser[3].equals(userIdFiled.getText()) && strUser[4].equals(String.valueOf(passwordFiled.getPassword()))){
-                        JFrame frame = new MainPage("SAN Fitness Club Main Page", strUser[1]);
+                    String[] strUser = arrOfStr[i].split("~");
+                    if (strUser[strUser.length-2].equals(userIdFiled.getText()) && strUser[strUser.length-1].equals(String.valueOf(passwordFiled.getPassword()))){
+                        JFrame frame = new MainPage("SAN Fitness Club Main Page", strUser[2]);
                         frame.setVisible(true);
                         flag= true;
+                        setVisible(false);
                         break;
                     }
                 }

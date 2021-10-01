@@ -1,33 +1,27 @@
 package Models;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.concurrent.TimeUnit;
 
 
 public class Clark extends Worker {
 
-    public Clark(int id, String fullName, String email, String phoneNumber, Date dateOfBirth, int workerId, Double salary, Date joinDate) {
-        super(id, fullName, email, phoneNumber, dateOfBirth, workerId, salary, joinDate);
+    public Clark(int id, String fullName, String email, String phoneNumber, Date dateOfBirth, Double salary, Date joinDate) {
+        super(id, fullName, email, phoneNumber, dateOfBirth, salary, joinDate);
     }
 
     // the clark salary is based on the base salary + 100 NIS on every month of work
     @Override
     public Double calculateSalary() {
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        Date join = null;
-        try {
-            join = sdf.parse(joinDate.toString());
-        }
-        catch (ParseException e) {
-            e.printStackTrace();
-        }
-
-        Date now = new Date(System.currentTimeMillis());
-
-        Calendar c = Calendar.getInstance();
-        c.setTimeInMillis(now.getTime() - join.getTime());
-        return this.salary + c.get(Calendar.MONTH) * 100;
+        Calendar m_calendar=Calendar.getInstance();
+        m_calendar.setTime(joinDate);
+        int nMonth1=12*m_calendar.get(Calendar.YEAR)+m_calendar.get(Calendar.MONTH);
+        m_calendar.setTime(new Date());
+        int nMonth2=12*m_calendar.get(Calendar.YEAR)+m_calendar.get(Calendar.MONTH);
+        return this.salary +Math.abs(nMonth2-nMonth1) * 20;
     }
 
     @Override

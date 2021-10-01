@@ -1,2 +1,7 @@
-id:123 Full Name:-Siel- Email:siel@gmail.com Phone Number: 0524205066 Date Of Birth: Wed Jun 06 00:00:00 IDT 3894 Trainee ID + Password: -1-1234
-id:134 Full Name:-sdsdf- Email:NAGFDN@GMAIL.COM Phone Number: 0402342 Date Of Birth: Wed Apr 06 00:00:00 IDT 3803 Trainee ID + Password: -1-1111
+
+1~Siel Farage~SielFarage@Gmail.com~0525520783~Sun Sep 19 00:00:00 IST 1993~Sun Feb 02 00:00:00 IST 2020~1~1234
+2~Natanel Endelshtein~Natanel770@Gmail.com~0524205066~Sat Sep 02 00:00:00 IDT 1995~Wed Feb 12 00:00:00 IST 2020~2~1234
+3~Alex Kalenyuk~Alexampm@Gmail.com~052250783~Mon Jun 19 00:00:00 IDT 1995~Fri Mar 20 00:00:00 IST 2020~3~1234
+1~Siel Farage~SielFarage@Gmail.com~0525520783~Sun Sep 19 00:00:00 IST 1993~Sun Feb 02 00:00:00 IST 2020~1~1234
+2~Natanel Endelshtein~Natanel770@Gmail.com~0524205066~Sat Sep 02 00:00:00 IDT 1995~Wed Feb 12 00:00:00 IST 2020~2~1234
+3~Alex Kalenyuk~Alexampm@Gmail.com~052250783~Mon Jun 19 00:00:00 IDT 1995~Fri Mar 20 00:00:00 IST 2020~3~1234

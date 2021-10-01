@@ -1,4 +1,6 @@
 package Models;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -11,11 +13,25 @@ public class Trainee extends Person {
     private String password;
     private ArrayList<Workout> workouts;
 
-    public Trainee(int id, String fullName, String email, String phoneNumber, Date dateOfBirth, String password) {
-        super(id, fullName, email, phoneNumber, dateOfBirth);
+    public Trainee(int id, String fullName, String email, String phoneNumber, Date dateOfBirth, String password, Date joinDate) {
+        super(id, fullName, email, phoneNumber, dateOfBirth,joinDate);
         this.traineeId = countTrainees++;
         this.password = password;
         workouts = new ArrayList<Workout>();
+        WriteToFile();
+    }
+
+    public void WriteToFile(){
+            try {
+                FileWriter myWriter = new FileWriter("src/Files/Trainees.txt", true);
+                myWriter.write("\n" + this.getDetails());
+                myWriter.close();
+                System.out.println("Successfully wrote to the file.");
+            } catch (IOException ex) {
+                System.out.println("An error occurred.");
+                ex.printStackTrace();
+            }
+
     }
 
     public int getTraineeId() {
@@ -41,22 +57,15 @@ public class Trainee extends Person {
 
     @Override
     public String getDetails() {
-        return super.getDetails() + " Trainee ID + Password: -"+ traineeId + "-"+ password;
+        return super.getDetails() + "~"+ traineeId + "~"+ password;
     }
 
     public int getTraineePayment(){
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        Date join = null;
-        try {
-            join = sdf.parse("2000-01-01");
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        Date now = new Date(System.currentTimeMillis());
+        long difference_In_Time = new Date().getTime() - joinDate.getTime();
+        long difference_In_Years
+                = (difference_In_Time
+                / (1000l * 60 * 60 * 24 * 365));
 
-        Calendar c = Calendar.getInstance();
-        c.setTimeInMillis(now.getTime() - join.getTime());
-        int numberOfYearsMembership = c.get(Calendar.YEAR)-1970;
-        return 200 - (numberOfYearsMembership * 10);
+        return (int) (200 - (difference_In_Years * 10));
     }
 }
