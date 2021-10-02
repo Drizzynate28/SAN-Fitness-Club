@@ -1,17 +1,12 @@
 package Pages;
-
 import Models.Gym;
 import Models.Trainee;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.net.StandardSocketOptions;
 import java.util.ArrayList;
-import java.util.Scanner;
+
 
 public class LoginPage extends JFrame {
     private JPasswordField passwordFiled;
@@ -29,6 +24,8 @@ public class LoginPage extends JFrame {
         this.setPreferredSize(new Dimension(600,560));
         this.setContentPane(LoginPanel);
         this.pack();
+        setLocationRelativeTo(null);
+        setVisible(true);
         this.gym = gym;
         registerButton.addActionListener(new ActionListener() {
             @Override
@@ -45,7 +42,7 @@ public class LoginPage extends JFrame {
                 ArrayList<Trainee> trainees = gym.getTrainees();
                 for (int i =0;i<trainees.size();i++){
                     if (trainees.get(i).getTraineeId() == Integer.parseInt(userIdFiled.getText()) && trainees.get(i).getPassword().equals(String.valueOf(passwordFiled.getPassword()))){
-                        JFrame frame = new MainPage("SAN Fitness Club Main Page", trainees.get(i).getFullName(),trainees.get(i),gym.getWorkouts());
+                        JFrame frame = new MainPage("SAN Fitness Club Main Page", trainees.get(i),gym.getWorkouts());
                         frame.setVisible(true);
                         flag= true;
                         setVisible(false);
@@ -53,7 +50,7 @@ public class LoginPage extends JFrame {
                     }
                 }
                 if(!flag) {
-                    JOptionPane.showMessageDialog(LoginPanel, "User Id or Password are incorrect", "User Not Found", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(LoginPanel, "User Id or Password are incorrect", "User Not Found", JOptionPane.ERROR_MESSAGE);
                 }
             }
         });

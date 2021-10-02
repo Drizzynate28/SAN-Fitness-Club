@@ -1,6 +1,4 @@
 package Models;
-import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.Date;
 
 public class Trainer extends Worker {
@@ -11,7 +9,7 @@ public class Trainer extends Worker {
     }
 
 
-    // the trainer will earn extra 100 NIS for every workout he trained
+    // the trainer will earn extra 50 NIS for every workout he trained
     @Override
     public Double calculateSalary() {
         return salary + numOfTrainings * 50;

@@ -1,6 +1,4 @@
 package Models;
-import java.text.ParseException;
-import java.time.LocalDate;
 import java.util.Date;
 
 public class Worker extends Person {

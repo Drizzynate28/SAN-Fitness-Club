@@ -1,10 +1,6 @@
 package Models;
-import java.time.LocalDate;
-import java.time.Period;
-import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.concurrent.TimeUnit;
 
 
 public class Clark extends Worker {
@@ -13,7 +9,7 @@ public class Clark extends Worker {
         super(id, fullName, email, phoneNumber, dateOfBirth, salary, joinDate);
     }
 
-    // the clark salary is based on the base salary + 100 NIS on every month of work
+    // the clark salary is based on the base salary + 20 NIS on every month of work
     @Override
     public Double calculateSalary() {
         Calendar m_calendar=Calendar.getInstance();

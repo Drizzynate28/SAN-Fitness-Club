@@ -1,5 +1,4 @@
 package Models;
-
 import java.util.ArrayList;
 
 public class Gym {
@@ -75,10 +74,6 @@ public class Gym {
 
     public double calculateProfit(){
         return calculateIncomes() - calculateOutcomes();
-    }
-
-    public String getDetails(){
-        return gymId+"~" + address;
     }
 
     @Override

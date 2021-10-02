@@ -24,10 +24,12 @@ public class SignUpWorkoutPage extends JFrame {
         super(title);
         this.traineeWorkouts = workouts;
         this.trainee = trainee;
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.setPreferredSize(new Dimension(500, 360));
         this.setContentPane(WorkoutPanel);
         this.pack();
+        this.setLocationRelativeTo(null);
+        this.setVisible(true);
         // read the workouts file
         try {
             File myObj = new File("src/Files/Workouts.txt");
@@ -80,7 +82,7 @@ public class SignUpWorkoutPage extends JFrame {
                     int selectedIndex = WorkoutList.getSelectedIndex();
                         model.remove(selectedIndex);
                 } else {
-                    JOptionPane.showMessageDialog(WorkoutPanel, "Please Select Workout", "Workout Not Selected", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(WorkoutPanel, "Please Select Workout", "Workout Not Selected", JOptionPane.ERROR_MESSAGE);
                     return;
                 }
                 String[] workouts = strDate.split("\n");
@@ -88,8 +90,15 @@ public class SignUpWorkoutPage extends JFrame {
                 for (int i = 0; i < workouts.length; i++) {
                     String[] workout = workouts[i].split(":");
                     if (workout.length>1) {
-                        if (workout[0].equals(selectedValue) && workout[1].split(",").length < 20) {
-                            newStr += workout[0] + ":" + workout[1] + "," + trainee.getTraineeId() + "\n";
+                        if (workout[0].equals(selectedValue)) {
+                            // check if the workout not full
+                            if(workout[1].split(",").length < 20) {
+                                newStr += workout[0] + ":" + workout[1] + "," + trainee.getTraineeId() + "\n";
+                            }
+                            else {
+                                JOptionPane.showMessageDialog(WorkoutPanel, "Please Select Different Workout", "Workout Is Full", JOptionPane.ERROR_MESSAGE);
+                                newStr+= workout[0] + ":" + workout[1] +"\n";
+                            }
 
                         } else {
                             newStr += workout[0] + ":" + workout[1] + "\n";
