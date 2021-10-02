@@ -68,8 +68,6 @@ public class SignUpWorkoutPage extends JFrame {
                 }
         }
 
-
-
         SignupButton.addActionListener(new ActionListener() {
 
             @Override
