@@ -18,7 +18,6 @@ public class Trainee extends Person {
         this.traineeId = countTrainees++;
         this.password = password;
         workouts = new ArrayList<Workout>();
-        WriteToFile();
     }
 
     public void WriteToFile(){
@@ -67,5 +66,13 @@ public class Trainee extends Person {
                 / (1000l * 60 * 60 * 24 * 365));
 
         return (int) (200 - (difference_In_Years * 10));
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

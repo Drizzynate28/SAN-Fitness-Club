@@ -1,7 +1,6 @@
 package Pages;
-
 import Models.Trainee;
-
+import Models.Workout;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -10,56 +9,98 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.Date;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class SignUpWorkoutPage extends JFrame {
     private JPanel WorkoutPanel;
     private JList WorkoutList;
     private JButton SignupButton;
+    private Trainee trainee;
+    private ArrayList<Workout> traineeWorkouts;
+    String strDate = "";
 
-    public SignUpWorkoutPage(String title) {
+    public SignUpWorkoutPage(String title, Trainee trainee, ArrayList<Workout>workouts)  {
         super(title);
+        this.traineeWorkouts = workouts;
+        this.trainee = trainee;
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setPreferredSize(new Dimension(500, 360));
         this.setContentPane(WorkoutPanel);
         this.pack();
-        String data = "";
+        // read the workouts file
+        try {
+            File myObj = new File("src/Files/Workouts.txt");
+            Scanner myReader = new Scanner(myObj);
+            while (myReader.hasNextLine()) {
+                String data = myReader.nextLine();
+                strDate += data + "\n";
+                System.out.println(data);
+            }
+            myReader.close();
+        } catch (FileNotFoundException ex) {
+            System.out.println("An error occurred.");
+            ex.printStackTrace();
+        }
+
+        // initialize existing trainee workout
+        String[] gymWorkouts = strDate.split("\n");
+        for (int k = 0;k<gymWorkouts.length;k++){
+            String[] workout = gymWorkouts[k].split(":");
+            if(workout.length>1) {
+                String [] assignTraineeWorkouts = workout[1].split(",");
+                for (int j = 0; j < assignTraineeWorkouts.length; j++) {
+                    if(Integer.parseInt(assignTraineeWorkouts[j]) ==trainee.getTraineeId()) {
+                        trainee.getWorkouts().add(traineeWorkouts.get(k));
+                    }
+                }
+            }
+        }
+        // act if the trainee already assigned to some workout
+        int countRemove =0;
+        for (int i =0;i<traineeWorkouts.size();i++){
+            for (int j = 0; j<trainee.getWorkouts().size();j++)
+                if(trainee.getWorkouts().get(j).getName() == traineeWorkouts.get(i).getName()){
+                    ((DefaultListModel) WorkoutList.getModel()).remove(i-countRemove);
+                    countRemove++;
+                }
+        }
+
+
+
         SignupButton.addActionListener(new ActionListener() {
 
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                String str = "";
                 String selectedValue = (String) WorkoutList.getSelectedValue();
 
                 if (selectedValue != null) {
-                    try {
-                        File myObj = new File("src/Files/Workouts.txt");
-                        Scanner myReader = new Scanner(myObj);
-                        while (myReader.hasNextLine()) {
-                            String data = myReader.nextLine();
-                            str += data + "\n";
-                            System.out.println(data);
-                        }
-                        myReader.close();
-                    } catch (FileNotFoundException ex) {
-                        System.out.println("An error occurred.");
-                        ex.printStackTrace();
-                    }
+                    DefaultListModel model = (DefaultListModel) WorkoutList.getModel();
+                    int selectedIndex = WorkoutList.getSelectedIndex();
+                        model.remove(selectedIndex);
                 } else {
                     JOptionPane.showMessageDialog(WorkoutPanel, "Please Select Workout", "Workout Not Selected", JOptionPane.INFORMATION_MESSAGE);
                     return;
                 }
-                String[] workouts = str.split("\n");
+                String[] workouts = strDate.split("\n");
                 String newStr = "";
                 for (int i = 0; i < workouts.length; i++) {
                     String[] workout = workouts[i].split(":");
-                    if (workout[0].equals(selectedValue) && Integer.parseInt(workout[1]) <= 20) {
-                        int workoutCount = Integer.parseInt(workout[1]) + 1;
-                        newStr += workout[0] + ":" + workoutCount + "\n";
-                    } else {
-                        newStr += workout[0] + ":" + workout[1] + "\n";
+                    if (workout.length>1) {
+                        if (workout[0].equals(selectedValue) && workout[1].split(",").length < 20) {
+                            newStr += workout[0] + ":" + workout[1] + "," + trainee.getTraineeId() + "\n";
+
+                        } else {
+                            newStr += workout[0] + ":" + workout[1] + "\n";
+                        }
+                    }
+                    else {
+                        if (workout[0].equals(selectedValue)) {
+                            newStr += workout[0] + ":" + trainee.getTraineeId() + ",\n";
+                        } else {
+                            newStr += workout[0] + ":"  + "\n";
+                        }
                     }
                 }
                 final String strToBeWritten = newStr;

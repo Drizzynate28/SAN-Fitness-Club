@@ -2,6 +2,8 @@ package com.company;
 import Models.*;
 import Pages.LoginPage;
 import javax.swing.*;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.Date;
@@ -33,13 +35,43 @@ public class Main {
         workouts.add(swimming);
 
         // Trainee Initialize
-        Trainee trainee1 = new Trainee(1, "Siel Farage", "SielFarage@Gmail.com", "0525520783", new Date(93, 8, 19), "1234",new Date(120, 1, 2));
-        Trainee trainee2 = new Trainee(2, "Natanel Endelshtein", "Natanel770@Gmail.com", "0524205066", new Date(95, 8, 2), "1234",new Date(120, 1, 12));
-        Trainee trainee3 = new Trainee(3, "Alex Kalenyuk", "Alexampm@Gmail.com", "052250783", new Date(95, 5, 19), "1234",new Date(120, 2, 20));
+        // read trainees from file if exists
+        String data = "";
+        String traineeStr ="";
+        try {
+            File myObj = new File("src/Files/Trainees.txt");
+            Scanner myReader = new Scanner(myObj);
+            while (myReader.hasNextLine()) {
+                data = myReader.nextLine();
+                traineeStr += data + "\n";
+            }
+            myReader.close();
+        } catch (FileNotFoundException ex) {
+            System.out.println("An error occurred.");
+            ex.printStackTrace();
+        }
         ArrayList<Trainee> trainees = new ArrayList<Trainee>();
-        trainees.add(trainee1);
-        trainees.add(trainee2);
-        trainees.add(trainee3);
+        if(data.length()==0){
+            Trainee trainee1 = new Trainee(1, "Siel Farage", "SielFarage@Gmail.com", "0525520783", new Date(93, 8, 19), "1234",new Date(120, 1, 2));
+            trainee1.WriteToFile();
+            Trainee trainee2 = new Trainee(2, "Natanel Endelshtein", "Natanel770@Gmail.com", "0524205066", new Date(95, 8, 2), "1234",new Date(120, 1, 12));
+            trainee2.WriteToFile();
+            Trainee trainee3 = new Trainee(3, "Alex Kalenyuk", "Alexampm@Gmail.com", "052250783", new Date(95, 5, 19), "1234",new Date(120, 2, 20));
+            trainee3.WriteToFile();
+            trainees.add(trainee1);
+            trainees.add(trainee2);
+            trainees.add(trainee3);
+        }
+        else {
+            String[] arrOfStr = traineeStr.split("\n");
+            for (int i = 0;i<arrOfStr.length;i++){
+                String[] strUser = arrOfStr[i].split("~");
+                String [] strBirthday = strUser[4].split("/");
+                String [] strJoin = strUser[5].split("/");
+                Trainee trainee = new Trainee(Integer.parseInt(strUser[0]),strUser[1],strUser[2],strUser[3],new Date(Integer.parseInt(strBirthday[2])-1900,Integer.parseInt(strBirthday[1]),Integer.parseInt(strBirthday[0])),strUser[7],new Date(Integer.parseInt(strJoin[2])-1900,Integer.parseInt(strJoin[1]),Integer.parseInt(strJoin[0])));
+                trainees.add(trainee);
+            }
+        }
 
         Gym gym = new Gym(1,"Netanya",workers,trainees,workouts);
 
@@ -48,7 +80,7 @@ public class Main {
         int Choice = scan.nextInt();
         do {
             if (Choice == 1) {
-                JFrame frame = new LoginPage("SAN Fitness Club");
+                JFrame frame = new LoginPage("SAN Fitness Club",gym);
                 frame.setVisible(true);
             } else if (Choice == 2) {
                 int choice =0;

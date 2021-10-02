@@ -1,5 +1,6 @@
 package Pages;
 
+import Models.Gym;
 import Models.Trainee;
 
 import javax.swing.*;
@@ -25,12 +26,14 @@ public class RegisterPage extends JFrame {
     private JTextField PhoneField;
     private JButton RegisterButton;
     private JTextField IdField;
+    private Gym gym;
 
-    public RegisterPage(String title) {
+    public RegisterPage(String title, Gym gym) {
         super(title);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setPreferredSize(new Dimension(500, 360));
         this.setContentPane(RegisterPanel);
+        this.gym = gym;
 
         MonthCB.addItem("Month");
         for (int i = 1; i <= 12; i++) {

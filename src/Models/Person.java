@@ -1,6 +1,9 @@
 package Models;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.time.format.DateTimeFormatter;
+import java.util.Calendar;
 import java.util.Date;
 
 public abstract class Person {
@@ -69,12 +72,14 @@ public abstract class Person {
 
 
     public String getDetails() {
-        return id + "~" + fullName + "~" + email + "~" + phoneNumber + "~" + dateOfBirth +"~" + joinDate;
+        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        String jDate = dateFormat.format(joinDate);
+        String bDate = dateFormat.format(dateOfBirth);
+        return id + "~" + fullName + "~" + email + "~" + phoneNumber + "~" + bDate +"~" + jDate;
     }
 
     @Override
     public String toString() {
-        DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("dd-MM-yyyy");
         return "id:" + id + " Full Name:" + fullName + " Email:" + email + " Phone Number: " + phoneNumber + " Date Of Birth: " + dateOfBirth+ " Join Date:" + joinDate;
     }
 
