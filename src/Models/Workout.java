@@ -9,6 +9,7 @@ public class Workout {
         this.workoutId = workoutId;
         this.name = name;
         this.duration = duration;
+        trainer.numOfTrainings++;
     }
 
     public int getWorkoutId() {
