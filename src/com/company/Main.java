@@ -9,6 +9,9 @@ import java.util.Scanner;
 import java.util.Date;
 public class Main {
 
+    //Natanel Endelshtein 316426659
+    //Siel Farage  311360549
+    //Alex Kalenyuk 313237844
     public static void main(String[] args) {
 	    // Workers Initialize
         Trainer trainer = new Trainer(125, "Roni Levy", "BeerSheva4@gmail.com", "0541111111", new Date(85, 1, 2), 20000.0, new Date(120, 1, 20));
