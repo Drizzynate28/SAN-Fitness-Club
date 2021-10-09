@@ -1,6 +1,6 @@
 # SAN-Fitness-Club 
 
-<img src="LOGO.jpg" width="100">
+<img src="LOGO.jpg">
 
 Final Project - Software Engineering course @ Ruppin Academic Center.
 
