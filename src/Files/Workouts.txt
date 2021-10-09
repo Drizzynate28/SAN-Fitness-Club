@@ -1,6 +1,6 @@
 YOGA:5,
 Weights:
 HIT:
-Zomba:2,3,6
+Zomba:2,3,6,1
 BodyBump:8,
 Swimming:
